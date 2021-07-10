@@ -1,8 +1,6 @@
 package ru.otus.spring.domain;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,8 +30,7 @@ public class Books {
     @JoinColumn(name = "authorsid")
     private Authors authors;
 
-    @Fetch(FetchMode.SUBSELECT)
-    @OneToMany(targetEntity = Comments.class, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(targetEntity = Comments.class, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "bookid")
     private List<Comments> comments;
 
