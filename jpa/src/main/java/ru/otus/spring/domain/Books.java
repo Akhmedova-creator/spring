@@ -13,7 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "books")
 @Table(name = "books")
-
+@NamedEntityGraph(name = "comments-entity-graph",
+        attributeNodes = {@NamedAttributeNode("comments")})
 public class Books {
 
     @Id
@@ -31,7 +32,8 @@ public class Books {
     @JoinColumn(name = "authorsid")
     private Authors authors;
 
-    @OneToMany(targetEntity = Comments.class, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(targetEntity = Comments.class, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "bookid")
     private List<Comments> comments;
 

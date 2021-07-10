@@ -1,11 +1,14 @@
 package ru.otus.spring.dao;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.domain.Books;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,10 +57,16 @@ public class BooksDaoRepositoriesJPAImpl implements BooksDaoRepositoriesJPA {
 
     @Override
     public List<Books> findAll() {
-        return em.createQuery("select distinct b from books b left join fetch b.comments ",
-                Books.class)
-                .getResultList();
-
+        EntityGraph<?> entityGraph = em.getEntityGraph("comments-entity-graph");
+        Session session = em.unwrap(Session.class);
+        CriteriaBuilder builder =em.getEntityManagerFactory().getCriteriaBuilder();
+        CriteriaQuery<Books> query = builder.createQuery(Books.class);
+        Root<Books> root = query.from(Books.class);
+        query.select(root);
+        Query<Books> q=session.createQuery(query);
+        q.setHint("javax.persistence.fetchgraph", entityGraph);
+        return q.getResultList();
     }
+
 }
 

@@ -14,8 +14,12 @@ public class ShellComands {
     private ServiceBook serviceBook;
 
     @ShellMethod(value = "command", key = {"getAll"})
-    public void find() {
+    public void getAll() {
         System.out.println(serviceBook.getBooks());
     }
 
+    @ShellMethod(value = "command", key = {"delete"})
+    public void delete() {
+       serviceBook.deleteBook(1l);
+    }
 }

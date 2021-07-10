@@ -9,14 +9,21 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class ServiceBookImpl implements ServiceBook {
 
     @Autowired
     private BooksDaoRepositoriesJPA booksDaoRepositoriesJPA;
 
+    @Transactional
     @Override
     public List<Books> getBooks() {
         return booksDaoRepositoriesJPA.findAll();
     }
+
+    @Transactional
+    @Override
+    public void deleteBook(Long id) {
+         booksDaoRepositoriesJPA.deleteById(id);
+    }
 }
+
