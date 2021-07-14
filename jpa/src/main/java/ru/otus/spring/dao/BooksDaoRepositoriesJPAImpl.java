@@ -59,18 +59,8 @@ public class BooksDaoRepositoriesJPAImpl implements BooksDaoRepositoriesJPA {
 
     @Override
     public List<Comments> findCommentsByBookId(Long id) {
-        Session session = em.unwrap(Session.class);
-        CriteriaBuilder builder = em.getEntityManagerFactory().getCriteriaBuilder();
-        CriteriaQuery<Books> queryComments = builder.createQuery(Books.class);
-
-        Root<Books> rootComments = queryComments.from(Books.class);
-        queryComments.select(rootComments);
-        queryComments.where(builder.equal(rootComments.get("id"),
-                id));
-
-        Query<Books> q = session.createQuery(queryComments);
-
-        return new ArrayList<>(q.getSingleResult().getComments());
+        Books books = em.find(Books.class,id);
+        return new ArrayList<>( books.getComments());
 
     }
 }
