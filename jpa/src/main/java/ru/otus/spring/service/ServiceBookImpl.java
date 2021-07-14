@@ -3,7 +3,7 @@ package ru.otus.spring.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.dao.BooksDaoRepositoriesJPA;
-import ru.otus.spring.domain.Books;
+import ru.otus.spring.domain.Comments;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,8 +16,8 @@ public class ServiceBookImpl implements ServiceBook {
 
     @Transactional
     @Override
-    public List<Books> getBooks() {
-        return booksDaoRepositoriesJPA.findAll();
+    public List<Comments> getBooks() {
+        return booksDaoRepositoriesJPA.findCommentsByBookId(2l);
     }
 
     @Transactional

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.Rollback;
 import ru.otus.spring.domain.Authors;
 import ru.otus.spring.domain.Books;
 import ru.otus.spring.domain.Comments;
@@ -21,11 +20,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("класс BooksDaoJdbcTest")
 @DataJpaTest
-@Import({BooksDaoRepositoriesJPAImpl.class})
+@Import({BooksDaoRepositoriesJPAImpl.class,CommentRepositoyJPAImpl.class})
+
 class BooksDaoJdbcTest {
 
     @Autowired
     private BooksDaoRepositoriesJPA booksDaoJdbc;
+
+    @Autowired
+    private CommentRepositoryJPA commentRepositoryJPA;
 
     @Autowired
     private TestEntityManager em;
@@ -120,12 +123,11 @@ class BooksDaoJdbcTest {
 
     @Test
     void shouldReturnExpectedBookAll() {
-        val books = booksDaoJdbc.findAll();
-        assertThat(books).isNotNull().hasSize(SIZE_BOOKS)
-                .allMatch(b -> !b.getTitle().equals(""))
-                .allMatch(b -> b.getAuthors() != null)
-                .allMatch(b -> b.getGenre() != null)
-                .allMatch(b -> b.getComments() != null);
+
+        val comments = booksDaoJdbc.findCommentsByBookId(1l);
+        assertThat(comments).isNotNull().hasSize(2)
+                .allMatch(b -> b.getCommentData() != null)
+                .allMatch(b -> b.getCommentName() != null);
 
     }
 }

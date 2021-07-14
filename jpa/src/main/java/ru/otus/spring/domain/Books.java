@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -26,11 +27,11 @@ public class Books {
     @JoinColumn(name = "genreid")
     private Genre genre;
 
-    @ManyToOne(targetEntity = Authors.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Authors.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "authorsid")
     private Authors authors;
 
-    @OneToMany(targetEntity = Comments.class, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(targetEntity = Comments.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "bookid")
     private List<Comments> comments;
 

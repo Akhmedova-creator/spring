@@ -1,11 +1,11 @@
 package ru.otus.spring.service;
 
-import ru.otus.spring.domain.Books;
+import ru.otus.spring.domain.Comments;
 
 import java.util.List;
 
 public interface ServiceBook {
-    List<Books> getBooks();
+    List<Comments> getBooks();
 
     void deleteBook(Long id);
 }

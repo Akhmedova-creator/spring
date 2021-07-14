@@ -4,11 +4,13 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.domain.Books;
+import ru.otus.spring.domain.Comments;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,17 +58,20 @@ public class BooksDaoRepositoriesJPAImpl implements BooksDaoRepositoriesJPA {
     }
 
     @Override
-    public List<Books> findAll() {
-        EntityGraph<?> entityGraph = em.getEntityGraph("comments-entity-graph");
+    public List<Comments> findCommentsByBookId(Long id) {
         Session session = em.unwrap(Session.class);
-        CriteriaBuilder builder =em.getEntityManagerFactory().getCriteriaBuilder();
-        CriteriaQuery<Books> query = builder.createQuery(Books.class);
-        Root<Books> root = query.from(Books.class);
-        query.select(root);
-        Query<Books> q=session.createQuery(query);
-        q.setHint("javax.persistence.fetchgraph", entityGraph);
-        return q.getResultList();
-    }
+        CriteriaBuilder builder = em.getEntityManagerFactory().getCriteriaBuilder();
+        CriteriaQuery<Books> queryComments = builder.createQuery(Books.class);
 
+        Root<Books> rootComments = queryComments.from(Books.class);
+        queryComments.select(rootComments);
+        queryComments.where(builder.equal(rootComments.get("id"),
+                id));
+
+        Query<Books> q = session.createQuery(queryComments);
+
+        return new ArrayList<>(q.getSingleResult().getComments());
+
+    }
 }
 

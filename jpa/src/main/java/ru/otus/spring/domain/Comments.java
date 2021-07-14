@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 @NoArgsConstructor
