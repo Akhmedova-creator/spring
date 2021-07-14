@@ -20,15 +20,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("класс BooksDaoJdbcTest")
 @DataJpaTest
-@Import({BooksDaoRepositoriesJPAImpl.class,CommentRepositoyJPAImpl.class})
+@Import({BooksDaoRepositoriesJPAImpl.class})
 
 class BooksDaoJdbcTest {
 
     @Autowired
     private BooksDaoRepositoriesJPA booksDaoJdbc;
-
-    @Autowired
-    private CommentRepositoryJPA commentRepositoryJPA;
 
     @Autowired
     private TestEntityManager em;
