@@ -5,7 +5,7 @@ import ru.otus.spring.domain.Comments;
 import java.util.List;
 
 public interface ServiceBook {
-    List<Comments> getBooks();
+    List<Comments> getCommentsOfBook(Long id);
 
     void deleteBook(Long id);
 }

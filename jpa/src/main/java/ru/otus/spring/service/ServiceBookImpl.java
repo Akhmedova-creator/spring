@@ -16,8 +16,8 @@ public class ServiceBookImpl implements ServiceBook {
 
     @Transactional
     @Override
-    public List<Comments> getBooks() {
-        return booksDaoRepositoriesJPA.findCommentsByBookId(2l);
+    public List<Comments> getCommentsOfBook(Long id) {
+        return booksDaoRepositoriesJPA.findById(id).get().getComments();
     }
 
     @Transactional

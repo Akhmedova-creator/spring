@@ -118,14 +118,5 @@ class BooksDaoJdbcTest {
         assertThat(books.getTitle()).isNotEqualTo(oldTitle);
     }
 
-    @Test
-    void shouldReturnExpectedBookAll() {
-
-        val comments = booksDaoJdbc.findCommentsByBookId(1l);
-        assertThat(comments).isNotNull().hasSize(2)
-                .allMatch(b -> b.getCommentData() != null)
-                .allMatch(b -> b.getCommentName() != null);
-
-    }
 }
 

@@ -57,11 +57,5 @@ public class BooksDaoRepositoriesJPAImpl implements BooksDaoRepositoriesJPA {
         insert(books);
     }
 
-    @Override
-    public List<Comments> findCommentsByBookId(Long id) {
-        Books books = em.find(Books.class,id);
-        return new ArrayList<>( books.getComments());
-
-    }
 }
 

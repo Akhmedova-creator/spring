@@ -26,6 +26,7 @@ public class Comments {
     @Column(name = "comment_data")
     private LocalDate commentData;
 
+
     public Comments(String commentName, LocalDate commentData) {
         this.commentName = commentName;
         this.commentData = commentData;

@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -12,8 +11,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Entity(name = "books")
 @Table(name = "books")
-@NamedEntityGraph(name = "comments-entity-graph",
-        attributeNodes = {@NamedAttributeNode("comments")})
+
 public class Books {
 
     @Id
@@ -41,6 +39,7 @@ public class Books {
         this.authors = authors;
         this.comments = comments;
     }
+
 
     @Override
     public String toString() {
