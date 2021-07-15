@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ImportAutoConfiguration
 @DisplayName("репозиторий BookRepository")
+
 class BookRepositoryTest {
 
     @Autowired
@@ -30,33 +31,36 @@ class BookRepositoryTest {
     @DisplayName("корректый вывод авторов")
     @Test
     void shouldHaveCorrectSavBooks() {
-        String title = "Джава.Spring-фреймворк";
+        String title = "50 оттенков серого";
 
         ArrayList<Comments> comments = new ArrayList<>();
-        Comments comments1 = new Comments("3",
-                "Комментарий 3",
+        Comments comments1 = new Comments("1",
+                "Комментарий 1",
                 LocalDate.now());
-        Comments comments2 = new Comments("4",
-                "Комментарий 4",
+        Comments comments2 = new Comments("2",
+                "Комментарий 2",
                 LocalDate.now());
         comments.add(comments1);
         comments.add(comments2);
 
-        Genre genre = new Genre("2",
-                "Наука");
-        Authors authors = new Authors("2",
-                "Хорстман",
-                "Кей");
+        Genre genre = new Genre("1",
+                "Роман");
+        Authors authors = new Authors("1",
+                "Джеймс",
+                "Леонард");
 
         Books books = new Books(title,
                 genre,
                 authors,
                 comments);
 
-        booksRepository.save(books);
-
         Books books1 = booksRepository.findByTitle(title);
-        assertEquals(books,
-                books1);
+        System.out.println("foty"+books1);
+        assertEquals(books.getComments(), books1.getGenre());
+        assertEquals(books.getTitle(), books1.getTitle());
+        assertEquals(books.getGenre(), books1.getGenre());
+        assertEquals(books.getAuthors(), books1.getAuthors());
+
+
     }
 }
