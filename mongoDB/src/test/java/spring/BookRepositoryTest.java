@@ -58,11 +58,7 @@ class BookRepositoryTest {
 
         booksRepository.save(books);
 
-        Books books1 = booksRepository.findByTitle("50 оттенков серого");
-
-        List<Books> books2=booksRepository.findAll();
-        System.out.println("fara "+books2);
-        System.out.println("beha "+books1);
+        Books books1 = booksRepository.findByTitle(title);
         assertEquals(books,
                 books1);
     }
