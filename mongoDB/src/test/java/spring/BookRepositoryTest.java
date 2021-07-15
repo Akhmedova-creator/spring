@@ -1,11 +1,15 @@
 package spring;
+import com.github.cloudyrock.spring.v5.EnableMongock;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import spring.doman.Authors;
 import spring.doman.Books;
@@ -18,10 +22,10 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
-@ExtendWith(SpringExtension.class)
-@ImportAutoConfiguration
+@DataMongoTest
+@EnableMongock
 @DisplayName("репозиторий BookRepository")
+@ComponentScan
 
 class BookRepositoryTest {
 
@@ -55,12 +59,10 @@ class BookRepositoryTest {
                 comments);
 
         Books books1 = booksRepository.findByTitle(title);
-        System.out.println("foty"+books1);
-        assertEquals(books.getComments(), books1.getGenre());
+        assertEquals(books.getComments(), books1.getComments());
         assertEquals(books.getTitle(), books1.getTitle());
         assertEquals(books.getGenre(), books1.getGenre());
         assertEquals(books.getAuthors(), books1.getAuthors());
-
 
     }
 }
