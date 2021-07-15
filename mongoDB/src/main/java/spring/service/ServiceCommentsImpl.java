@@ -7,7 +7,6 @@ import spring.doman.Comments;
 import spring.repository.CommentsRepository;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class ServiceCommentsImpl implements ServiceComments {
@@ -16,8 +15,7 @@ public class ServiceCommentsImpl implements ServiceComments {
 
     @Transactional
     @Override
-    public List<Comments> getCommentsByDate(LocalDate date) {
-      //  return commentsRepository.getNowDate(date);
-        return  null;
+    public Comments getCommentsByDate(LocalDate date) {
+        return  commentsRepository.findByCommentData(date);
     }
 }

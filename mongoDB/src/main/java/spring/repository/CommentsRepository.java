@@ -3,11 +3,10 @@ package spring.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import spring.doman.Comments;
 
-import java.util.List;
-
+import java.time.LocalDate;
 
 public interface CommentsRepository extends MongoRepository<Comments,Long> {
-    List<Comments> findAll();
     Comments findByCommentName(String name);
+    Comments findByCommentData(LocalDate date);
 
 }
