@@ -8,5 +8,5 @@ spring:
     runner-type: "ApplicationRunner" # default
     #runner-type: "InitializingBean"
     change-logs-scan-package:
-      - spring.mongock.spring.changelog
+      - spring.mongock.changelog
 
