@@ -21,13 +21,12 @@ public class Books {
     @Field
     private String title;
 
-    @DBRef
+    @Field
     private Genre genre;
 
-    @DBRef(lazy = true)
+    @Field
     private Authors authors;
 
-    @DBRef
     private List<Comments> comments;
 
 

@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface BooksRepository extends MongoRepository<Books,Long> {
     List<Books> findByGenreAndAuthors(Genre genre, Authors authors);
-    List<Books> findByComments(Comments comments);
+    List findByComments(Comments comments);
     Books findByTitle(String title);
 }
