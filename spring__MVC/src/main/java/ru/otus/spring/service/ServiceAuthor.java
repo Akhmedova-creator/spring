@@ -1,10 +1,13 @@
 package ru.otus.spring.service;
 
-import org.springframework.data.domain.Sort;
 import ru.otus.spring.doman.Author;
+import java.util.List;
+import java.util.Optional;
 
 public interface ServiceAuthor {
-    Iterable<Author> getAuthors(Sort sort);
+    List<Author> getAuthors();
 
     Author findByFirstName(String name);
+
+    Optional<Author> findByIdAuthor(String id);
 }

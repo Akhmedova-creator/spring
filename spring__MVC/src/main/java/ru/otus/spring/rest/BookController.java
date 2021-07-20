@@ -1,5 +1,6 @@
 package ru.otus.spring.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.spring.doman.Author;
 import ru.otus.spring.doman.Book;
 import ru.otus.spring.doman.Genre;
-import ru.otus.spring.repository.AuthorRepository;
-import ru.otus.spring.repository.BookRepository;
-import ru.otus.spring.repository.GenreRepository;
+import ru.otus.spring.service.ServiceAuthor;
+import ru.otus.spring.service.ServiceBook;
+import ru.otus.spring.service.ServiceGenre;
 
 import java.util.List;
 
@@ -17,22 +18,21 @@ import java.util.List;
 @Controller
 public class BookController {
 
-    private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
-    private final GenreRepository genreRepository;
+    @Autowired
+    private ServiceBook serviceBook;
 
+    @Autowired
+    private ServiceAuthor serviceAuthor;
 
-    public BookController(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository) {
-        this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
-        this.genreRepository = genreRepository;
-    }
+    @Autowired
+    private ServiceGenre serviceGenre;
+
 
     private void initAttributes(Model model) {
         model.addAttribute("author",
-                authorRepository.findAll());
+                serviceAuthor.getAuthors());
         model.addAttribute("genres",
-                genreRepository.findAll());
+                serviceGenre.getGenres());
         model.addAttribute("newBook");
         model.addAttribute("newAuthor");
         model.addAttribute("newGenre");
@@ -41,7 +41,7 @@ public class BookController {
 
     @GetMapping("/")
     public String listPage(Model model) {
-        List<Book> book = bookRepository.findAll();
+        List<Book> book = serviceBook.getBooks();
         model.addAttribute("book",
                 book);
         return "list";
@@ -50,16 +50,16 @@ public class BookController {
 
     @GetMapping("/edit")
     public String editPage(@RequestParam String id, Model model) {
-        Book book = bookRepository.findById(id).orElseThrow(NotFoundException::new);
+        Book book = serviceBook.findByIdBook(id).orElseThrow(NotFoundException::new);
         model.addAttribute("book", book);
         return "edit";
     }
 
     @PostMapping("/edit")
     public String edit(Book book, Model model) {
-        Book save = bookRepository.findById(book.getId()).orElseThrow(NotFoundException::new);
+        Book save = serviceBook.findByIdBook(book.getId()).orElseThrow(NotFoundException::new);
         save.setTitle(book.getTitle());
-        model.addAttribute("book", bookRepository.save(save));
+        model.addAttribute("book", serviceBook.saveBook(save));
         return "edit";
     }
 
@@ -71,9 +71,9 @@ public class BookController {
 
     @GetMapping("/delete")
     public String deleteBook(Model model, @RequestParam String id) {
-        Book book = bookRepository.findById(id).orElseThrow(NotFoundException::new);
-        bookRepository.delete(book);
-        model.addAttribute("book", bookRepository.findAll());
+        Book book = serviceBook.findByIdBook(id).orElseThrow(NotFoundException::new);
+        serviceBook.deleteBook(book);
+        model.addAttribute("book", serviceBook.getBooks());
         return "list";
     }
 
@@ -83,13 +83,13 @@ public class BookController {
             String title, @ModelAttribute(value = "newAuthor")
                                    String idAuthor, @ModelAttribute(value = "newGenre") String idGenre) {
 
-       Genre genre = genreRepository.findById(idGenre).orElseThrow(NotFoundException::new);
-        Author author = authorRepository.findById(idAuthor).orElseThrow(NotFoundException::new);
+       Genre genre = serviceGenre.findByIdGenre(idGenre).orElseThrow(NotFoundException::new);
+        Author author = serviceAuthor.findByIdAuthor(idAuthor).orElseThrow(NotFoundException::new);
         Book save = new Book();
         save.setTitle(title);
         save.setGenre(genre);
         save.setAuthor(author);
-        bookRepository.save(save);
+        serviceBook.saveBook(save);
 
         initAttributes(model);
 

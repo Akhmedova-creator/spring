@@ -10,6 +10,7 @@ import ru.otus.spring.doman.Genre;
 import ru.otus.spring.repository.BookRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceBookImpl implements ServiceBook {
@@ -30,6 +31,21 @@ public class ServiceBookImpl implements ServiceBook {
     public List<Book> getBooksByGenreAndAuthors(Genre genre, Author author) {
         return bookRepository.findByGenreAndAuthor(genre,
                 author);
+    }
+
+    @Override
+    public Optional<Book> findByIdBook(String id) {
+        return bookRepository.findById(id);
+    }
+
+    @Override
+    public Book saveBook(Book book) {
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public void deleteBook(Book book) {
+        bookRepository.delete(book);
     }
 
 }

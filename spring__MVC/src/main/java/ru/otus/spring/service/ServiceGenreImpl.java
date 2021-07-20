@@ -7,6 +7,7 @@ import ru.otus.spring.doman.Genre;
 import ru.otus.spring.repository.GenreRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 ;
 
@@ -23,7 +24,12 @@ public class ServiceGenreImpl implements ServiceGenre {
 
     @Transactional
     @Override
-    public List<Genre> getAll() {
+    public List<Genre> getGenres() {
         return genreRepository.findAll();
+    }
+
+    @Override
+    public Optional<Genre> findByIdGenre(String id) {
+       return genreRepository.findById(id);
     }
 }
