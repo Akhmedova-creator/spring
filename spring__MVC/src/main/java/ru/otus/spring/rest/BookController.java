@@ -17,16 +17,17 @@ import java.util.List;
 
 @Controller
 public class BookController {
+    private final ServiceBook serviceBook;
 
-    @Autowired
-    private ServiceBook serviceBook;
+    private final ServiceAuthor serviceAuthor;
 
-    @Autowired
-    private ServiceAuthor serviceAuthor;
+    private final ServiceGenre serviceGenre;
 
-    @Autowired
-    private ServiceGenre serviceGenre;
-
+    public BookController(ServiceBook serviceBook, ServiceAuthor serviceAuthor, ServiceGenre serviceGenre) {
+        this.serviceBook = serviceBook;
+        this.serviceAuthor = serviceAuthor;
+        this.serviceGenre = serviceGenre;
+    }
 
     private void initAttributes(Model model) {
         model.addAttribute("author",
@@ -40,7 +41,7 @@ public class BookController {
     }
 
     @GetMapping("/")
-    public String listPage(Model model) {
+    public String listBook(Model model) {
         List<Book> book = serviceBook.getBooks();
         model.addAttribute("book",
                 book);
@@ -48,15 +49,15 @@ public class BookController {
 
     }
 
-    @GetMapping("/edit")
-    public String editPage(@RequestParam String id, Model model) {
+    @GetMapping("/edit/{id}")
+    public String editPage(@PathVariable String id, Model model) {
         Book book = serviceBook.findByIdBook(id).orElseThrow(NotFoundException::new);
         model.addAttribute("book", book);
         return "edit";
     }
 
     @PostMapping("/edit")
-    public String edit(Book book, Model model) {
+    public String editBook(Book book, Model model) {
         Book save = serviceBook.findByIdBook(book.getId()).orElseThrow(NotFoundException::new);
         save.setTitle(book.getTitle());
         model.addAttribute("book", serviceBook.saveBook(save));
