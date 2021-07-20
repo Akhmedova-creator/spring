@@ -17,7 +17,7 @@ public class ServiceAuthorImpl implements ServiceAuthor {
     @Transactional
     @Override
     public List<Author> getAuthors() {
-      return authorRepository.findAll();
+        return authorRepository.findAll();
     }
 
     @Transactional

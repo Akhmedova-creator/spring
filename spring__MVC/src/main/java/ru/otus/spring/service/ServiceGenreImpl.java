@@ -30,6 +30,6 @@ public class ServiceGenreImpl implements ServiceGenre {
 
     @Override
     public Optional<Genre> findByIdGenre(String id) {
-       return genreRepository.findById(id);
+        return genreRepository.findById(id);
     }
 }

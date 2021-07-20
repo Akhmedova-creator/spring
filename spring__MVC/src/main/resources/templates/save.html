@@ -5,7 +5,7 @@
     <title>Edit book</title>
 </head>
 <body>
-<form id="save-form" name="form"  th:action="@{/save}" th:method="post" action="save.html">
+<form id="save-form" name="form" th:action="@{/save}" th:method="post" action="save.html">
     <h1>Save new Book </h1>
 
     <div class="row">
@@ -23,15 +23,17 @@
     </div>
 
     <div class="row">
-        <select id="selectAuthor" >
-        <option th:each="author : ${author}" th:value="${author.id}" name="authorOption" type="text" th:text="${author}" value="firstName">
-        </option>
+        <select id="selectAuthor">
+            <option th:each="author : ${author}" th:value="${author.id}" name="authorOption" type="text"
+                    th:text="${author}" value="firstName">
+            </option>
         </select>
     </div>
 
     <div class="row">
         <select id="selectGenre">
-        <option th:each="genre : ${genres}"  th:value="${genre.id}" name="genreOption" type="text" th:text="${genre}"></option>
+            <option th:each="genre : ${genres}" th:value="${genre.id}" name="genreOption" type="text"
+                    th:text="${genre}"></option>
         </select>
     </div>
 
@@ -45,6 +47,7 @@ function getValue(){
 document.getElementById('idAuthor').value = selectAuthor.value;
 document.getElementById('idGenre').value = selectGenre.value;
 }
+
 
 </script>
 </body>

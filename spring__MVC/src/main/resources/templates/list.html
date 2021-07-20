@@ -12,6 +12,7 @@
             border: 1px solid lightgray;
             padding: 5px;
         }
+
     </style>
 </head>
 <body>
@@ -29,23 +30,23 @@
     </tr>
     </thead>
     <tbody>
-       <div>
+    <div>
         <tr th:each="book : ${book}">
-        <td th:text="${book.id}"></td>
-        <td th:text="${book.title}"></td>
-        <td th:text="${book.author}"></td>
-        <td th:text="${book.genre}"></td>
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.genre}"></td>
 
-        <td>
-            <a th:href="@{/edit(id=${book.id})}">Edit</a>
-        </td>
+            <td>
+                <a th:href="@{/edit(id=${book.id})}">Edit</a>
+            </td>
             <td>
                 <a th:href="@{/delete(id=${book.id})}">Delete</a>
             </td>
         </tr>
-       </div>
+    </div>
 
-        <div> <a th:href="@{/save}">Create a new Book</a></div>
+    <div><a th:href="@{/save}">Create a new Book</a></div>
     </tbody>
 
 </table>

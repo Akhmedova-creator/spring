@@ -52,7 +52,8 @@ public class BookController {
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable String id, Model model) {
         Book book = serviceBook.findByIdBook(id).orElseThrow(NotFoundException::new);
-        model.addAttribute("book", book);
+        model.addAttribute("book",
+                book);
         return "edit";
     }
 
@@ -60,7 +61,8 @@ public class BookController {
     public String editBook(Book book, Model model) {
         Book save = serviceBook.findByIdBook(book.getId()).orElseThrow(NotFoundException::new);
         save.setTitle(book.getTitle());
-        model.addAttribute("book", serviceBook.saveBook(save));
+        model.addAttribute("book",
+                serviceBook.saveBook(save));
         return "edit";
     }
 
@@ -74,7 +76,8 @@ public class BookController {
     public String deleteBook(Model model, @RequestParam String id) {
         Book book = serviceBook.findByIdBook(id).orElseThrow(NotFoundException::new);
         serviceBook.deleteBook(book);
-        model.addAttribute("book", serviceBook.getBooks());
+        model.addAttribute("book",
+                serviceBook.getBooks());
         return "list";
     }
 
@@ -84,7 +87,7 @@ public class BookController {
             String title, @ModelAttribute(value = "newAuthor")
                                    String idAuthor, @ModelAttribute(value = "newGenre") String idGenre) {
 
-       Genre genre = serviceGenre.findByIdGenre(idGenre).orElseThrow(NotFoundException::new);
+        Genre genre = serviceGenre.findByIdGenre(idGenre).orElseThrow(NotFoundException::new);
         Author author = serviceAuthor.findByIdAuthor(idAuthor).orElseThrow(NotFoundException::new);
         Book save = new Book();
         save.setTitle(title);
@@ -96,8 +99,9 @@ public class BookController {
 
         return "save";
     }
+
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handlNotFind(NotFoundException handlNotFind){
+    public ResponseEntity<String> handlNotFind(NotFoundException handlNotFind) {
         return ResponseEntity.badRequest().body("Not find entity");
     }
 }

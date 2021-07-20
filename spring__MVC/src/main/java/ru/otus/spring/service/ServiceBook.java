@@ -10,8 +10,12 @@ import java.util.Optional;
 
 public interface ServiceBook {
     List<Book> getBooks();
+
     List<Book> getBooksByGenreAndAuthors(Genre genre, Author author);
+
     Optional<Book> findByIdBook(String id);
-    Book  saveBook(Book book);
-    void deleteBook(Book  book);
+
+    Book saveBook(Book book);
+
+    void deleteBook(Book book);
 }

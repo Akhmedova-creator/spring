@@ -1,7 +1,6 @@
 package ru.otus.spring.mongock.changelog;
 
 
-
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import ru.otus.spring.doman.Author;
