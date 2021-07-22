@@ -1,6 +1,6 @@
 package ru.otus.spring.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import ru.otus.spring.service.ServiceGenre;
 
 import java.util.List;
 
-
+@Data
 @Controller
 public class BookController {
     private final ServiceBook serviceBook;
@@ -23,11 +23,6 @@ public class BookController {
 
     private final ServiceGenre serviceGenre;
 
-    public BookController(ServiceBook serviceBook, ServiceAuthor serviceAuthor, ServiceGenre serviceGenre) {
-        this.serviceBook = serviceBook;
-        this.serviceAuthor = serviceAuthor;
-        this.serviceGenre = serviceGenre;
-    }
 
     private void initAttributes(Model model) {
         model.addAttribute("author",
