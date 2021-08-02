@@ -6,20 +6,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<form id="save-form" name="form" method="post" action="/saveBook">
+<form id="save-form" name="form">
     <h1>Save new Book </h1>
 
     <div class="row">
         <label for="holder-input">Title:</label>
         <input id="holder-input" name="newBook" type="text" value="bookValue"/>
-    </div>
-
-    <div hidden="false" class="row">
-        <input id="idAuthor" type="text" name="newAuthor" value="authorValue"></label>
-    </div>
-
-    <div hidden="false" class="row">
-        <input id="idGenre" type="text" name="newGenre" value="genreValue"></label>
     </div>
 
     <div class="row">
@@ -56,8 +48,7 @@
         })
 
        $('button').bind('click', function(){
-       document.getElementById('idAuthor').value = selectAuthor.value;
-       document.getElementById('idGenre').value = selectGenre.value;
+       $.post("/saveBooks", { title: $('#holder-input').val(), idGenre: $('#selectGenre').val(),idAuthor: $('#selectAuthor').val()} );
 		});
 
   });

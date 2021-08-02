@@ -40,20 +40,8 @@ public class BookController {
         return "успешно удалена книга";
     }
 
-    public Book saveBook(String title, String idGenre, String idAuthor) {
-        Genre genre = serviceGenre.findByIdGenre(idGenre).orElseThrow(NotFoundException::new);
-        Author author = serviceAuthor.findByIdAuthor(idAuthor).orElseThrow(NotFoundException::new);
-        Book save = new Book();
-        save.setTitle(title);
-        save.setGenre(genre);
-        save.setAuthor(author);
-        return serviceBook.saveBook(save);
-    }
-
-    @PostMapping("/saveBooks/{title}/{idGenre}/idAuthor")
-    public Book save(@PathVariable(value = "title", required = false) String title,
-                     @PathVariable(value = "idGenre", required = false) String idGenre,
-                     @PathVariable(value = "idAuthor", required = false) String idAuthor) {
+    @PostMapping("/saveBooks")
+    public Book save(String title, String idGenre, String idAuthor) {
         Genre genre = serviceGenre.findByIdGenre(idGenre).orElseThrow(NotFoundException::new);
         Author author = serviceAuthor.findByIdAuthor(idAuthor).orElseThrow(NotFoundException::new);
         Book save = new Book();
