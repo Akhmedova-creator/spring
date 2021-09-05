@@ -14,7 +14,6 @@
         }
 
 
-
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -28,17 +27,18 @@
         <th>Title</th>
         <th>Authors</th>
         <th>Genre</th>
-        <th>Edit</th>
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
+    <a href="/save">CREATE A NEW BOOK</a>
     </tbody>
 </table>
 
 <script>
     $(function () {
         $.get('api/books').done(function (books) {
+
             books.forEach(function (book) {
                 $('tbody').append(`
                     <tr>
@@ -46,14 +46,12 @@
                         <td>${book.title}</td>
                         <td>${book.author}</td>
                         <td>${book.genre}</td>
-                         <td><a href="/save">Edit</a></td>
-                         <td> <a href="/delete">Delete</a> </td>
+                         <td> <a href="/delete/${book.id}">Delete</a> </td>
                     </tr>
                 `)
             });
         })
     });
-
 
 </script>
 </body>

@@ -3,20 +3,14 @@ package ru.otus.spring.rest.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import ru.otus.spring.doman.Author;
-import ru.otus.spring.doman.Book;
-import ru.otus.spring.doman.Genre;
-
-import java.util.function.DoubleToIntFunction;
+import ru.otus.spring.domain.Book;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookDto {
 
-    private String id;
+    private Long id;
 
     private String title;
 

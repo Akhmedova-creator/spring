@@ -1,15 +1,16 @@
 package ru.otus.spring.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import ru.otus.spring.doman.Genre;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
+import ru.otus.spring.domain.Genre;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface GenreRepository extends MongoRepository<Genre, Integer> {
-    Genre findByName(String name);
-
+public interface GenreRepository extends JpaRepository<Genre, Long> {
+    @PostFilter("hasPermission(filterObject, 'READ')")
     List<Genre> findAll();
 
-    Optional<Genre> findById(String id);
+    @PostAuthorize("hasPermission(returnObject, 'READ')")
+    Genre getById(Long id);
 }
