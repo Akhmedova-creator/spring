@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+  http://www.liquibase.org/xml/ns/pro
+  http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <include file="db/changelog/1.0/11.07.2021--001-create-genre.xml"/>
+    <include file="db/changelog/1.0/11.07.2021--002-create-authors.xml"/>
+    <include file="db/changelog/1.0/11.07.2021-003-create-books.xml"/>
+    <include file="db/changelog/1.0/11.07.2021-004-create-comments.xml"/>
+</databaseChangeLog>

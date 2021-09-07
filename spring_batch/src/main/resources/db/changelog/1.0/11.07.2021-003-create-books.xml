@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="11.07.2021-003-create-books1" author="AkhmedovaFI">
+        <createTable tableName="books">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genreid" type="bigint">
+                <constraints foreignKeyName="books_genre_id_genre_id" references="genre(id)"/>
+            </column>
+            <column name="authorsid" type="bigint">
+                <constraints foreignKeyName="books_authors_id_authors_id" references="authors(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="11.07.2021-003-create-books2" author="AkhmedovaFI">
+        <insert tableName="books">
+            <column name="title" value="Алгоритмы и структуры данных"/>
+            <column name="genreid" value="1"/>
+            <column name="authorsid" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="11.07.2021-003-create-books3" author="AkhmedovaFI">
+        <insert tableName="books">
+            <column name="title" value="Джава.Основы"/>
+            <column name="genreid" value="1"/>
+            <column name="authorsid" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="11.07.2021-003-create-books4" author="AkhmedovaFI">
+        <insert tableName="books">
+            <column name="title" value="Джава.Spring-фреймворк"/>
+            <column name="genreid" value="1"/>
+            <column name="authorsid" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="11.07.2021-003-create-books5" author="AkhmedovaFI">
+        <insert tableName="books">
+            <column name="title" value="50 оттенков серого"/>
+            <column name="genreid" value="2"/>
+            <column name="authorsid" value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
