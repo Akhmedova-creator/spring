@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "authors")
+@Entity
 @Table(name = "authors")
 public class Authors {
 

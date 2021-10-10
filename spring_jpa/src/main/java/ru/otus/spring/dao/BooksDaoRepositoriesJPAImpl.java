@@ -22,7 +22,7 @@ public class BooksDaoRepositoriesJPAImpl implements BooksDaoRepositoriesJPA {
      */
     @Override
     public Integer count() {
-        TypedQuery<Books> query = em.createQuery("select b from books b",
+        TypedQuery<Books> query = em.createQuery("select b from Books b",
                 Books.class);
         return query.getResultList().size();
 
@@ -69,7 +69,7 @@ public class BooksDaoRepositoriesJPAImpl implements BooksDaoRepositoriesJPA {
      */
     @Override
     public List<Books> getAll() {
-        TypedQuery<Books> query = em.createQuery("select b from books b join fetch b.authors ",
+        TypedQuery<Books> query = em.createQuery("select b from Books b join fetch b.authors ",
                 Books.class);
         return query.getResultList();
     }

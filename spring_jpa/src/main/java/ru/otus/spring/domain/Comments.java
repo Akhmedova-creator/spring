@@ -14,7 +14,7 @@ import java.util.List;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "comments")
+@Entity
 @Data
 @Table(name = "comments")
 public class Comments {
