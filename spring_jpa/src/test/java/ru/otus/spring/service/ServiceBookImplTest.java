@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("класс BooksDaoJdbcTest")
 @DataJpaTest
-@Import({ServiceBookImpl.class,BooksDaoRepositoriesJPAImpl.class})
+@Import({ServiceBookImpl.class, BooksDaoRepositoriesJPAImpl.class})
 class ServiceBookImplTest {
 
     @Autowired
@@ -22,7 +22,6 @@ class ServiceBookImplTest {
 
     @Test
     void shouldReturnExpectedBookAll() {
-        System.out.println("fara"+serviceBook.getCommentsOfBook(1l));
         val comments = serviceBook.getCommentsOfBook(1l);
         assertThat(comments).isNotNull().hasSize(2)
                 .allMatch(b -> b.getCommentData() != null)

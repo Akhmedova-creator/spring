@@ -13,13 +13,8 @@ public class ShellComands {
     @Autowired
     private ServiceBook serviceBook;
 
-    @ShellMethod(value = "command", key = {"getAll"})
-    public void getAll() {
-        System.out.println(serviceBook.getBooks());
-    }
-
     @ShellMethod(value = "command", key = {"delete"})
     public void delete() {
-       serviceBook.deleteBook(1l);
+        serviceBook.deleteBook(1l);
     }
 }

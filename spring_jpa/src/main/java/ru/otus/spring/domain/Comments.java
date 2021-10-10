@@ -9,7 +9,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Repository
+/**
+ * класс(сущность), которая есть в бд с сооотвествующими полями
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "comments")

@@ -1,6 +1,8 @@
 package ru.otus.spring.dao;
 
 import ru.otus.spring.domain.Books;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface BooksDaoRepositoriesJPA {
@@ -13,4 +15,6 @@ public interface BooksDaoRepositoriesJPA {
     void updateNameById(long id, String name);
 
     void deleteById(long id);
+
+    List<Books> getAll();
 }

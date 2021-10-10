@@ -21,7 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("класс BooksDaoJdbcTest")
 @DataJpaTest
 @Import({BooksDaoRepositoriesJPAImpl.class})
-
 class BooksDaoJdbcTest {
 
     @Autowired
@@ -118,5 +117,12 @@ class BooksDaoJdbcTest {
         assertThat(books.getTitle()).isNotEqualTo(oldTitle);
     }
 
+    @DisplayName(" должен корректно выдавать список книг")
+    @Test
+    void shouldGetAllBooks() {
+        List<Books> actualBooks = booksDaoJdbc.getAll();
+        assertThat(actualBooks.size()).isEqualTo(4);
+
+    }
 }
 
