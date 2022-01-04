@@ -1,6 +1,5 @@
 package ru.otus.spring.config;
 
-import com.github.cloudyrock.spring.v5.EnableMongock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.*;
@@ -29,13 +28,16 @@ import ru.otus.spring.spring_mongo.doman_mongo.BooksMongo;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
+/**
+ * Класс -реалиация джобы. Миграция данных из SQL в NOSQL
+ */
 @Configuration
 public class JobConfig {
 
     private static final int CHUNK_SIZE = 5;
     private final Logger logger = LoggerFactory.getLogger("Batch");
 
-    public static final String IMPORT_USER_JOB_NAME = "importUserJob";
+    private static final String IMPORT_USER_JOB_NAME = "importUserJob";
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -44,6 +46,10 @@ public class JobConfig {
     private StepBuilderFactory stepBuilderFactory;
 
 
+    /**
+     * чтение данных из mongodb
+     * @return данные из таблицы BooksMongo
+     */
     @StepScope
     @Bean
     public MongoItemReader<BooksMongo> reader(MongoTemplate mongoTemplate) {
@@ -55,12 +61,22 @@ public class JobConfig {
 
     }
 
+    /**
+     * перевод книги из nosql(mongo) в sql
+     * @param transfor классдля выполнения перевода
+     * @return книга из хранилищи spring-data
+     */
     @StepScope
     @Bean
     public ItemProcessor<BooksMongo, Books> processor(Transfor transfor) {
         return transfor::doBooks;
     }
 
+    /**
+     * класс работа для осуществления миграции
+     * @param transformPersonsStep шаги чтение,перевод и запись данных
+     * @return выполненую работу
+     */
     @Bean
     public Job importUserJob(Step transformPersonsStep) {
         return jobBuilderFactory.get(IMPORT_USER_JOB_NAME)
@@ -82,6 +98,11 @@ public class JobConfig {
     }
 
 
+    /**
+     * запись в репозиторий spring-data
+     * @param dataSource для работы с sql
+     * @return записанную сущгность
+     */
     @StepScope
     @Bean
     public JdbcBatchItemWriter<Books> writer(DataSource dataSource) {
@@ -97,6 +118,13 @@ public class JobConfig {
 
     }
 
+    /**
+     * объединение шагов
+     * @param reader чтение даных из mongo
+     * @param writer запись в реляционную бд
+     * @param itemProcessor перевод сущности из mongo репозитория в data-репозиторий
+     * @return выполненый шаг
+     */
     @Bean
     public Step transformPersonsStep(ItemReader<BooksMongo> reader,
                                      ItemWriter<Books> writer,
