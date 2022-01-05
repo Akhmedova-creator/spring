@@ -7,17 +7,18 @@ import ru.otus.spring.domain.Authors;
 import ru.otus.spring.repository.AuthorsRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ServiceAuthorsImpl implements ServiceAuthors {
+
     @Autowired
     private AuthorsRepository authorsRepository;
 
     @Transactional
     @Override
-    public Iterable<Authors> getAuthors(Sort sort) {
-        Iterable<Authors> all = authorsRepository.findAll(sort);
-        return all;
+    public List<Authors> getAuthors(Sort sort) {
+        return  authorsRepository.findAll(sort);
     }
 
     @Transactional

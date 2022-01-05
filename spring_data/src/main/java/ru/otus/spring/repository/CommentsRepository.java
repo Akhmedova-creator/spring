@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface CommentsRepository extends CrudRepository<Comments,Long> {
-    @Query("select c from comments c where c.commentData=:date")
+    @Query("select c from Comments c where c.commentData=:date")
     List<Comments> getNowDate(@Param("date") LocalDate date );
+    List<Comments> findAll();
+
 }

@@ -16,6 +16,12 @@ public class ServiceCommentsImpl implements ServiceComments {
     @Transactional
     @Override
     public List<Comments> getCommentsByDate(LocalDate date) {
-        return commentsRepository.getNowDate(date);
+        return null;// commentsRepository.getNowDate(date);
+    }
+
+    @Transactional
+    @Override
+    public List<Comments> getComments() {
+        return commentsRepository.findAll();
     }
 }

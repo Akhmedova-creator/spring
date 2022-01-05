@@ -29,8 +29,6 @@ class AuthorsRepositoryTest {
                 new Authors(2l, "Михаил", "Лабковcкий"),
                 new Authors(3l, "Джеймс", "Леонард"));
 
-        System.out.println("fara "+ genreRepository.findAll());
-
         List<Authors> actual = authorsRepository.findAll(Sort.by(Sort.Direction.DESC, "firstName"));
         assertEquals(exprected, actual);
     }

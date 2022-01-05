@@ -17,8 +17,6 @@ public class ServiceBookImpl implements ServiceBook {
     @Autowired
     private BooksRepository booksRepository;
 
-    @Autowired
-    private GenreRepository genreRepository;
 
     @Transactional
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "books")
+@Entity
 @Table(name = "books")
 public class Books {
 
@@ -19,23 +19,18 @@ public class Books {
     @Column(name = "title", nullable = false, unique = true)
     private String title;
 
-    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "genreid")
     private Genre genre;
 
-    @ManyToOne(targetEntity = Authors.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Authors.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "authorsid")
     private Authors authors;
 
-    @OneToMany(targetEntity = Comments.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "bookid")
-    private List<Comments> comments;
-
-    public Books(String title, Genre genre, Authors authors, List<Comments> comments) {
+    public Books(String title, Genre genre, Authors authors) {
         this.title = title;
         this.genre = genre;
         this.authors = authors;
-        this.comments = comments;
     }
 }
 

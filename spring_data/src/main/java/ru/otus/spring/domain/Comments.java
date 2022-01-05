@@ -8,12 +8,11 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Repository
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "comments")
 @Data
 @Table(name = "comments")
+@Entity
 public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +24,15 @@ public class Comments {
     @Column(name = "comment_data")
     private LocalDate commentData;
 
-    public Comments(String commentName, LocalDate commentData) {
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "bookid")
+    private Books books;
+
+    public Comments(String commentName, LocalDate commentData, Books books) {
         this.commentName = commentName;
         this.commentData = commentData;
+        this.books = books;
     }
+
 }
 
