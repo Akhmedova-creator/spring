@@ -1,8 +1,20 @@
+#spring:
+#  data:
+#    mongodb:
+#      database: library
+#server:
+#  port: 8082
+#  host: 8082
 spring:
   data:
     mongodb:
-      database: library
+    username: Employeeadmin
+    password: password
+    database: test
+    port: 5435
+    host: 5435
 
+#    uri: mongodb://Employeeadmin:password@5435:5435/test
 
   mongock:
     runner-type: "ApplicationRunner" # default
