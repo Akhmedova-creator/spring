@@ -9,4 +9,11 @@ spring:
     #runner-type: "InitializingBean"
     change-logs-scan-package:
       - ru.otus.spring.mongock.changelog
+hystrix:
+  command:
+    getKey:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds=3000:
 

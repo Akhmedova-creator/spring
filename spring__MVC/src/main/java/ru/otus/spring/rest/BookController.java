@@ -1,5 +1,7 @@
 package ru.otus.spring.rest;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -35,8 +37,10 @@ public class BookController {
 
     }
 
+    @HystrixCommand(commandKey="getKey", fallbackMethod = "fallBack")
     @GetMapping("/")
-    public String listBook(Model model) {
+    public String listBook(Model model) throws InterruptedException {
+        Thread.sleep(8000);
         List<Book> book = serviceBook.getBooks();
         model.addAttribute("book",
                 book);
@@ -44,6 +48,11 @@ public class BookController {
 
     }
 
+    String fallBack(Model model){
+        System.out.println("Метод HystrixCommand заработал");
+        model.addAttribute("Пустая книга");
+        return  "list";
+    }
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable String id, Model model) {
         Book book = serviceBook.findByIdBook(id).orElseThrow(NotFoundException::new);
