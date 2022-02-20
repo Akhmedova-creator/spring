@@ -1,8 +1,8 @@
 spring:
   data:
-    mongodb:
-      database: library
-
+      username: Employeeadmin
+      password: password
+      database: tests
 
   mongock:
     runner-type: "ApplicationRunner" # default
