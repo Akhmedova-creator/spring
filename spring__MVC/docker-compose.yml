@@ -9,26 +9,9 @@ services:
       - "8082:8082"
     # Эти свойства перегружают соответствующие в application.yml
     environment:
-      - SPRING_DATA_HOST=5435
-      - SPRING_DATA_PORT=5435
-#      - SPRING_DATA_URI=mongodb://Employeeadmin:password@5435:5435/test
-      - SPRING_DATA_DATABASE=test
-      - SPRING_DATA_USERNAME=Employeeadmin
-      - SPRING_DATA_PASSWORD=password
-    networks:
-      - nw
-
-
-
-  mongo:
-    # В идеале должна быть ещё и версия image
-    image: "mongo"
-    ports:
-      - "5435:5435"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: Employeeadmin
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: test
+     - SPRING_DATA_MONGO_DB = tests
+     - SPRING_DATA_USERNAME = Employeeadmin
+     - SPRING_DATA_PASSWORD = password
     networks:
       - nw
 networks:
